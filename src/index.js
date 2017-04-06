@@ -4,12 +4,15 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import { createLogger } from 'redux-logger'
 
+import throttle from 'lodash/throttle'
+
 import App from './App';
 import { loadState, saveState } from './localStorage'
 import './index.css';
 
 const logger = createLogger();
 
+const persistedState = loadState();
 const initialState = {
   editor: {
     value: '',
@@ -25,10 +28,13 @@ const rootReducer = (state = initialState, action) => {
   }
 }
 
-const storeWithMiddleware = applyMiddleware(logger)(createStore)
-const store = storeWithMiddleware(rootReducer, initialState)
+const store = createStore(
+  rootReducer,
+  persistedState,
+  applyMiddleware(logger)
+)
 store.subscribe(() => {
-  saveState(store.getState());
+  throttle(() => saveState(store.getState()), 1000)
 })
 
 ReactDOM.render(
