@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import { createLogger } from 'redux-logger'
+
 import App from './App';
+import { loadState, saveState } from './localStorage'
 import './index.css';
 
 const logger = createLogger();
@@ -13,6 +15,7 @@ const initialState = {
     value: '',
   },
 }
+
 const rootReducer = (state = initialState, action) => {
   switch(action.type) {
     case 'EDITOR_CHANGE':
@@ -24,6 +27,9 @@ const rootReducer = (state = initialState, action) => {
 
 const storeWithMiddleware = applyMiddleware(logger)(createStore)
 const store = storeWithMiddleware(rootReducer, initialState)
+store.subscribe(() => {
+  saveState(store.getState());
+})
 
 ReactDOM.render(
   <Provider store={store}>
