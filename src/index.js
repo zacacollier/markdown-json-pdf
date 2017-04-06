@@ -17,12 +17,17 @@ const initialState = {
   editor: {
     value: '',
   },
+  save: {
+    pending: null,
+    success: null,
+    error: null,
+  }
 }
 
 const rootReducer = (state = initialState, action) => {
   switch(action.type) {
     case 'EDITOR_CHANGE':
-      return { ...state, editor: { ...state.editor, value: action.edValue } }
+      return { ...state, editor: { ...state.editor, value: action.editorValue } }
     default:
       return state
   }

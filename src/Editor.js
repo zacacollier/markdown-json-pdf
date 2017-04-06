@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import SimpleMDE from 'react-simplemde-editor'
 
 const Editor = ({ onChange, value }) => (
