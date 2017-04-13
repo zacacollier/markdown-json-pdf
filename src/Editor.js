@@ -8,7 +8,7 @@ const Editor = ({ onChange, value }) => (
       value={value}
     />
   </div>
-)
+);
 
 
-export default Editor
+export default Editor;

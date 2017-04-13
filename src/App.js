@@ -1,29 +1,36 @@
 import React  from 'react';
 import { connect } from 'react-redux';
 
-import { saveMD } from './saveMD'
-import ButtonGroup from './ButtonGroup';
 import Editor from './Editor';
+import * as A from './actions'
 import './vendor.css';
 
-const App = ({ value, handleChange, handleSave }) => (
-  <div className='container container-narrow'>
+const App = ({ editorValue, handleChange, handleSave }) => (
+  <form
+    className='container container-narrow'
+    value={editorValue}
+    onSubmit={(event, value) => {
+      event.preventDefault();
+      console.log(editorValue);
+      handleSave(editorValue);
+    }}
+  >
     <Editor
       onChange={(editorValue) => handleChange(editorValue)}
-      value={value}
+      value={editorValue}
     />
-    <ButtonGroup
-      onClick={(value) => handleSave(value)}
-    />
-  </div>
+    <button type="submit">
+      Save as '.md'
+    </button>
+  </form>
 );
 
 const mapStateToProps = (state) => ({
-  value: state.editor.value
+  editorValue: state.editor.editorValue
 })
 const mapDispatchToProps = (dispatch) => ({
-  handleChange: (editorValue) => dispatch({ type: 'EDITOR_CHANGE', editorValue }),
-  handleSave: (value) => saveMD(value)
+  handleChange: (editorValue) => dispatch(A.updateEditorValue(editorValue)),
+  handleSave:   (editorValue) => dispatch(A.saveMarkdown(editorValue)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
