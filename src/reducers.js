@@ -5,7 +5,6 @@ export const initialState = {
   save: {
     standBy: true,
     pending: null,
-    success: null,
     error: null,
   }
 }
@@ -27,7 +26,6 @@ export const rootReducer = (state = initialState, action) => {
             ...state.save,
             pending: null,
             standBy: true,
-            success: true
           }
       }
     case 'EDITOR_SAVE_ERROR':
@@ -36,7 +34,6 @@ export const rootReducer = (state = initialState, action) => {
             ...state.save,
             pending: null,
             standBy: true,
-            success: false,
             error: action.error
           }
       }
