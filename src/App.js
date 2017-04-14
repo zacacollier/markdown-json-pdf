@@ -8,9 +8,9 @@ import './vendor.css';
 
 const App = ({
   // State-to-Props
-  editorAlert, editorValue, keyMap, keyMapOptions,
+  editorAlert, editorValue,
   // Dispatch-to-Props
-  handleAlert, handleChange, handleSave, handleSelectKeyMap
+  handleAlert, handleChange, handleSave
 }) => (
   <form
     className='container container-narrow'
@@ -20,28 +20,11 @@ const App = ({
       editorValue ? handleSave(editorValue) : handleAlert()
     }}
   >
-    <select
-      name="keyMap"
-      defaultValue={keyMap}
-      onChange={(e) => handleSelectKeyMap(e.target.value)}
-    >
-      {
-        keyMapOptions.map(o => (
-          <option
-            key={keyMapOptions.indexOf(o)}
-            value={o}
-          >
-            {upperFirst(o)}
-          </option>
-        ))
-      }
-    </select>
     <SimpleMDE
       onChange={(editorValue) => handleChange(editorValue)}
       value={editorValue}
       options={{
         autofocus: true,
-        keyMap: keyMap
       }}
     />
     { editorValue ? '' : <p>{editorAlert}</p> }
@@ -54,14 +37,11 @@ const App = ({
 const mapStateToProps = (state) => ({
   editorAlert: state.editor.editorAlert,
   editorValue: state.editor.editorValue,
-  keyMap: state.editor.keyMap,
-  keyMapOptions: state.editor.keyMapOptions,
 })
 const mapDispatchToProps = (dispatch) => ({
   handleAlert: (editorAlert) => dispatch({ type: 'EDITOR_ALERT', editorAlert: "We wouldn't want to save an empty file, now would we?"}),
   handleChange: (editorValue) => dispatch(A.updateEditorValue(editorValue)),
   handleSave:   (editorValue) => dispatch(A.saveMarkdown(editorValue)),
-  handleSelectKeyMap: (value) => dispatch(A.selectKeyMap(value)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
