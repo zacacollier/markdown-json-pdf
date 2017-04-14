@@ -8,16 +8,16 @@ import './vendor.css';
 
 const App = ({
   // State-to-Props
-  editorValue, keyMap, keyMapOptions,
+  editorAlert, editorValue, keyMap, keyMapOptions,
   // Dispatch-to-Props
-  handleChange, handleSave, handleSelectKeyMap
+  handleAlert, handleChange, handleSave, handleSelectKeyMap
 }) => (
   <form
     className='container container-narrow'
     value={editorValue}
     onSubmit={(event, value) => {
       event.preventDefault();
-      handleSave(editorValue);
+      editorValue ? handleSave(editorValue) : handleAlert()
     }}
   >
     <select
@@ -44,6 +44,7 @@ const App = ({
         keyMap: keyMap
       }}
     />
+    { editorValue ? '' : <p>{editorAlert}</p> }
     <button type="submit">
       Save as '.md'
     </button>
@@ -51,11 +52,13 @@ const App = ({
 );
 
 const mapStateToProps = (state) => ({
+  editorAlert: state.editor.editorAlert,
   editorValue: state.editor.editorValue,
   keyMap: state.editor.keyMap,
   keyMapOptions: state.editor.keyMapOptions,
 })
 const mapDispatchToProps = (dispatch) => ({
+  handleAlert: (editorAlert) => dispatch({ type: 'EDITOR_ALERT', editorAlert: "We wouldn't want to save an empty file, now would we?"}),
   handleChange: (editorValue) => dispatch(A.updateEditorValue(editorValue)),
   handleSave:   (editorValue) => dispatch(A.saveMarkdown(editorValue)),
   handleSelectKeyMap: (value) => dispatch(A.selectKeyMap(value)),

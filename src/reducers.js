@@ -1,6 +1,7 @@
 export const initialState = {
   editor: {
     editorValue: '',
+    editorAlert: '',
     keyMap: 'default',
     keyMapOptions: [
       'default', 'vim', 'emacs'
@@ -17,6 +18,8 @@ export const initialState = {
 }
 export const rootReducer = (state = initialState, action) => {
   switch(action.type) {
+    case 'EDITOR_ALERT':
+      return { ...state, editor: { ...state.editor, editorAlert: action.editorAlert } }
     case 'EDITOR_CHANGE':
       return { ...state, editor: { ...state.editor, editorValue: action.editorValue } }
     case 'EDITOR_SET_KEYMAP':
