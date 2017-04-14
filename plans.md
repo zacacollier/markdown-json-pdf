@@ -10,8 +10,7 @@
   - [x] toggle preview on / off
       STRETCH:
         - [x] toggle full or split view
-- [] Create writeable stream to Markdown
-  - [] Trigger Markdown to JSON
-  - [] Trigger JSON to PDF
-    - How to trigger Chrome API for download?
+- use file-save to save markdown
+  - [x] Trigger Save As .md
+  - [] Trigger Markdown to HTML
 

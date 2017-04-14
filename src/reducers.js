@@ -1,6 +1,13 @@
 export const initialState = {
   editor: {
     editorValue: '',
+    keyMap: 'default',
+    keyMapOptions: [
+      'default', 'vim', 'emacs'
+    ]
+  },
+  Markup: {
+    preview: '<div></div>',
   },
   save: {
     standBy: true,
@@ -12,6 +19,8 @@ export const rootReducer = (state = initialState, action) => {
   switch(action.type) {
     case 'EDITOR_CHANGE':
       return { ...state, editor: { ...state.editor, editorValue: action.editorValue } }
+    case 'EDITOR_SET_KEYMAP':
+      return { ...state, editor: { ...state.editor, keyMap: action.value } }
     case 'REQUEST_EDITOR_SAVE':
       return { ...state, save:
           {
@@ -36,6 +45,10 @@ export const rootReducer = (state = initialState, action) => {
             standBy: true,
             error: action.error
           }
+      }
+    case 'REQUEST_HTML_PREVIEW':
+      return { ...state, Markup:
+        { ...state.Markup, preview: action.markup }
       }
     case 'RESET_EDITOR_SAVE_STATE':
       return { ...state, save: initialState.save }

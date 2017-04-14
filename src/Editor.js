@@ -1,11 +1,11 @@
 import React from 'react'
-import SimpleMDE from 'react-simplemde-editor'
 
-const Editor = ({ onChange, value }) => (
+const Editor = ({ onChange, value, keyMap }) => (
   <div>
     <SimpleMDE
       onChange={onChange}
       value={value}
+      keyMap={keyMap}
     />
   </div>
 );
