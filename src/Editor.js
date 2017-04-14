@@ -1,14 +1,26 @@
 import React from 'react'
+import { connect } from 'react-redux';
+import SimpleMDE from 'react-simplemde-editor';
 
-const Editor = ({ onChange, value, keyMap }) => (
+import * as A from './actions'
+
+const Editor = ({
+  editorValue,
+  handleChange,
+ }) => (
   <div>
     <SimpleMDE
-      onChange={onChange}
-      value={value}
-      keyMap={keyMap}
+      onChange={(editorValue) => handleChange(editorValue)}
+      value={editorValue}
     />
   </div>
 );
 
+const mapStateToProps = (state) => ({
+  editorValue: state.editor.editorValue,
+})
+const mapDispatchToProps = (dispatch) => ({
+  handleChange: (editorValue) => dispatch(A.updateEditorValue(editorValue)),
+})
 
-export default Editor;
+export default connect(mapStateToProps, mapDispatchToProps)(Editor);

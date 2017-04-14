@@ -2,7 +2,7 @@ import React  from 'react';
 import { connect } from 'react-redux';
 import { upperFirst } from 'lodash/string'
 import SimpleMDE from 'react-simplemde-editor'
-// import Editor from './Editor';
+import Editor from './Editor';
 import * as A from './actions'
 import './vendor.css';
 
