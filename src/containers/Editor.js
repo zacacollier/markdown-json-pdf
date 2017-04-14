@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import SimpleMDE from 'react-simplemde-editor';
 
-import * as A from './actions'
+import * as A from '../actions'
 
 const Editor = ({
   editorValue,

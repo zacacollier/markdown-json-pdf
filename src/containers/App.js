@@ -1,10 +1,8 @@
 import React  from 'react';
 import { connect } from 'react-redux';
-import { upperFirst } from 'lodash/string'
-import SimpleMDE from 'react-simplemde-editor'
 import Editor from './Editor';
-import * as A from './actions'
-import './vendor.css';
+import * as A from '../actions'
+import '../styles/vendor.css';
 
 const App = ({
   // State-to-Props
@@ -20,13 +18,7 @@ const App = ({
       editorValue ? handleSave(editorValue) : handleAlert()
     }}
   >
-    <SimpleMDE
-      onChange={(editorValue) => handleChange(editorValue)}
-      value={editorValue}
-      options={{
-        autofocus: true,
-      }}
-    />
+    <Editor />
     { editorValue ? '' : <p>{editorAlert}</p> }
     <button type="submit">
       Save as '.md'

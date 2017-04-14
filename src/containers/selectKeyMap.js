@@ -1,7 +1,7 @@
 import React  from 'react';
 import { connect } from 'react-redux';
 
-import * as A from './actions'
+import * as A from '../actions'
 
 const SelectKeyMap = ({
   keymap, keyMapOptions,

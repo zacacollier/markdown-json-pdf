@@ -7,10 +7,10 @@ import thunk from 'redux-thunk';
 
 import throttle from 'lodash/throttle';
 
-import App from './App';
-import { saveState } from './localStorage';
-import { initialState, rootReducer } from './reducers';
-import './index.css';
+import App from './containers/App';
+import { saveState } from './constants/localStorage';
+import { initialState, rootReducer } from './reducers/index';
+import './styles/index.css';
 
 const logger = createLogger();
 // const persistedState = loadState();

@@ -1,4 +1,4 @@
-import { saveState } from './localStorage';
+import { saveState } from '../constants/localStorage';
 import FileSaver from 'file-saver';
 import showdown from 'showdown';
 
