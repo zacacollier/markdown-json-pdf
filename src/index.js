@@ -14,7 +14,6 @@ import { initialState, rootReducer } from './reducers/index';
 import './styles/index.css';
 
 const logger = createLogger();
-// const persistedState = loadState();
 export const store = createStore(
   rootReducer,
   initialState,

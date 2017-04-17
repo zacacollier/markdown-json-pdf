@@ -1,6 +1,10 @@
+import { loadState } from '../constants/localStorage';
+const persistedState = loadState();
+console.log(persistedState);
+
 export const initialState = {
   editor: {
-    editorValue: '',
+    editorValue: persistedState ? persistedState : '',
     editorAlert: '',
     keyMap: 'default',
     keyMapOptions: [
