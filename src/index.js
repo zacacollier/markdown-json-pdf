@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { compose, applyMiddleware, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
+import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk';
 
 import throttle from 'lodash/throttle';
@@ -17,7 +18,9 @@ const logger = createLogger();
 export const store = createStore(
   rootReducer,
   initialState,
-  compose(applyMiddleware(thunk, logger)),
+  composeWithDevTools(
+    compose(applyMiddleware(thunk, logger)),
+  )
 );
 
 store.subscribe(() => throttle(() => saveState(store.getState()), 1000));

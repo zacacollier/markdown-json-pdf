@@ -5,10 +5,8 @@ import * as A from '../actions'
 import '../styles/vendor.css';
 
 const App = ({
-  // State-to-Props
   editorAlert, editorValue,
-  // Dispatch-to-Props
-  handleAlert, handleChange, handleSave
+  handleAlert, handleChange, handleSave, handleConvert
 }) => (
   <form
     className='container container-narrow'
@@ -21,7 +19,7 @@ const App = ({
     <Editor />
     { editorValue ? '' : <p>{editorAlert}</p> }
     <button type="submit">
-      Save as '.md'
+      Save '.md' and '.html'
     </button>
   </form>
 );
@@ -32,6 +30,7 @@ const mapStateToProps = (state) => ({
 })
 const mapDispatchToProps = (dispatch) => ({
   handleAlert: (editorAlert) => dispatch({ type: 'EDITOR_ALERT', editorAlert: "We wouldn't want to save an empty file, now would we?"}),
+  handleConvert: (editorValue) => dispatch(A.saveMarkdownToHtml),
   handleChange: (editorValue) => dispatch(A.updateEditorValue(editorValue)),
   handleSave:   (editorValue) => dispatch(A.saveMarkdown(editorValue)),
 })
